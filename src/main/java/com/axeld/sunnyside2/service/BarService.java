@@ -9,7 +9,7 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public final class BarService {
+public class BarService {
 
   private final BarRepository barRepository;
 

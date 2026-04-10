@@ -2,6 +2,8 @@ package com.axeld.sunnyside2.service;
 
 import java.util.Optional;
 
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -14,11 +16,17 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public class AuthService {
+public class AuthService implements UserDetailsService {
 
   private final UserRepository userRepository;
   private final BCryptPasswordEncoder bCryptPasswordEncoder;
   private final JwtService jwtService;
+
+  @Override
+  public UserDetails loadUserByUsername(String email) {
+    return userRepository.findByEmail(email)
+        .orElseThrow(() -> new RuntimeException("Utilisateur introuvable"));
+  }
 
   public User saveUser(RegisterRequest registerRequest) {
 
