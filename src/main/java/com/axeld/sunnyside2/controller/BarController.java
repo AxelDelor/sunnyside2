@@ -7,13 +7,11 @@ import com.axeld.sunnyside2.service.BarService;
 
 import lombok.RequiredArgsConstructor;
 
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 
 
 @RestController
 @RequiredArgsConstructor
-@CrossOrigin(origins = "http://localhost:5173")
 public class BarController {
 
 private final BarService barService;
@@ -22,5 +20,6 @@ private final BarService barService;
 public Iterable<Bar>  getBars() {
     return barService.getBars();
 }
+
 
 }
