@@ -9,17 +9,15 @@ import lombok.RequiredArgsConstructor;
 
 import org.springframework.web.bind.annotation.GetMapping;
 
-
 @RestController
 @RequiredArgsConstructor
 public class BarController {
 
-private final BarService barService;
+  private final BarService barService;
 
-@GetMapping("/bars")
-public Iterable<Bar>  getBars() {
+  @GetMapping("/bars")
+  public Iterable<Bar> getBars() {
     return barService.getBars();
-}
-
+  }
 
 }
