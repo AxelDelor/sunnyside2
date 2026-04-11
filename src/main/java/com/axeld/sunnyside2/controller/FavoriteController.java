@@ -8,15 +8,24 @@ import com.axeld.sunnyside2.service.FavoriteService;
 
 import lombok.RequiredArgsConstructor;
 
+import java.util.List;
+
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.GetMapping;
 
 @RestController
 @RequiredArgsConstructor
 public class FavoriteController {
 
   private final FavoriteService favoriteService;
+
+  @GetMapping("/favorites")
+  public List<Favorite> getFavorites() {
+    User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    return favoriteService.getFavorites(user);
+  }
 
   @PostMapping("/favorite")
   public Favorite createFavorite(@RequestBody Favorite favorite) {
