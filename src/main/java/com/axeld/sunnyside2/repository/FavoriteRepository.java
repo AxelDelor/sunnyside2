@@ -16,4 +16,6 @@ public interface FavoriteRepository extends CrudRepository<Favorite, Long> {
   List<Favorite> findByUser(User user);
 
   Optional<Favorite> findByUserAndBar(User user, Bar bar);
+
+  void deleteByIdAndUser(Long id, User user);
 }

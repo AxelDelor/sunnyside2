@@ -8,6 +8,7 @@ import com.axeld.sunnyside2.model.Favorite;
 import com.axeld.sunnyside2.model.User;
 import com.axeld.sunnyside2.repository.FavoriteRepository;
 
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -34,4 +35,8 @@ public class FavoriteService {
     return favoriteRepository.findByUserAndBar(favorite.getUser(), favorite.getBar()).isPresent();
   }
 
+  @Transactional
+  public void deleteFavorite(Long id, User user) {
+    favoriteRepository.deleteByIdAndUser(id, user);
+  }
 }
