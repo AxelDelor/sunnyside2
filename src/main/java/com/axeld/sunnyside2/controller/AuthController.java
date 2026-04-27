@@ -8,6 +8,7 @@ import com.axeld.sunnyside2.service.AuthService;
 
 import lombok.RequiredArgsConstructor;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,8 +19,14 @@ public class AuthController {
 
   private final AuthService authService;
 
+  @Value("${allow.registration:true}")
+  private boolean allowRegistration;
+
   @PostMapping("/api/auth/register")
   public ResponseEntity<String> register(@RequestBody RegisterRequest entity) {
+    if (!allowRegistration) {
+        return ResponseEntity.status(403).body("Inscription désactivée");
+    }
     authService.saveUser(entity);
     return ResponseEntity.ok("Vous êtes maintenant inscrit");
   }
