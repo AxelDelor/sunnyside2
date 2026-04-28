@@ -26,6 +26,7 @@ public class SecurityConfig {
         .cors(cors -> cors.configurationSource(request -> {
           CorsConfiguration config = new CorsConfiguration();
           config.addAllowedOrigin("http://localhost:5173");
+          config.addAllowedOrigin("https://sunnyside2-frontend-361ebrsc0-axeldelors-projects.vercel.app");
           config.addAllowedMethod("*");
           config.addAllowedHeader("*");
           return config;
